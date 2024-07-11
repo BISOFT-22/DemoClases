@@ -5,23 +5,17 @@
           <th scope="col">ID</th>
           <th scope="col">Name</th>
           <th scope="col">Description</th>
-          <th scope="col">Price</th>
-          <th scope="col">Stock</th>
-          <th scope="col">Category</th>
           <th scope="col">Created</th>
           <th scope="col">Updated</th>
           <th class="text-center" scope="col">Actions</th>
         </tr>
       </thead>
       <tbody>
-        @for (item of productList; track item.id) {
+        @for (item of categoryList; track item.id) {
         <tr>
           <th scope="row">{{item.id}}</th>
           <td>{{item.name}}</td>
           <td>{{item.description}}</td>
-          <td>{{item.price}}</td>
-          <td>{{item.stock}}</td>
-          <td>{{item.category?.name}}</td>
           <td>{{item.createdAt | date: 'dd/MM/yyyy HH:mm'}}</td>
           <td>{{item.updatedAt | date: 'dd/MM/yyyy HH:mm'}}</td>
           <td>
@@ -30,7 +24,7 @@
                 <i class="fa-solid fa-eye white"
                 ></i>
               </button>
-              <button type="button" (click)="deleteProduct(item)" class="btn btn-danger">
+              <button type="button" (click)="deleteCategory(item)" class="btn btn-danger">
                 <i class="fa-solid fa-trash white"
                 ></i>
               </button>
@@ -43,10 +37,10 @@
   </div>
   
   <app-modal size="lg" #formModal>
-    <app-product-form 
-    [product]="currentProduct" 
+    <app-category-form 
+    [category]="currentCategory" 
     [action]="'edit'"
-    [title]="'Update Product'"
+    [title]="'Update Category'"
     >
-  </app-product-form>
+  </app-category-form>
   </app-modal>

@@ -42,19 +42,38 @@ export enum IRoleType {
 }
 
 export interface IRole {
-  createdAt: string,
-  description: string,
-  id: number
-  name : string,
-  updatedAt: string
+  createdAt: string;
+  description: string;
+  id: number;
+  name : string;
+  updatedAt: string;
 }
 
 export interface IGame {
-  id?: number
-  name?: string,
-  imgURL?: string,
-  status?: string,
-  description?: string,
-  createdAt?: string,
-  updatedAt?: string
+  id?: number;
+  name?: string;
+  imgURL?: string;
+  status?: string;
+  description?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface ICategory{
+  id?: number;
+  name?: string;
+  description?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface IProduct {
+  id?: number;
+  name?: string;
+  description?: string;
+  price?: string;
+  stock?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  category?: ICategory;
 }
