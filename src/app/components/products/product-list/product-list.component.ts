@@ -32,6 +32,7 @@ export class ProductListComponent {
     price: '',
     stock: '',
     category: {},
+    id_category: 0
   };
   
   constructor() {
@@ -42,7 +43,13 @@ export class ProductListComponent {
   }
 
   showDetail(product: IProduct, modal: any) {
-    this.currentProduct = {...product}; 
+    this.currentProduct = { ...product };
+    
+    //GJDES - Si la categoria viene definida se iguala id_category a category.id
+    if (this.currentProduct.category?.id) {
+      
+      this.currentProduct.id_category = this.currentProduct.category?.id;
+    }
     modal.show();
   }
 

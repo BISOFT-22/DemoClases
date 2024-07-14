@@ -76,4 +76,5 @@ export interface IProduct {
   createdAt?: string;
   updatedAt?: string;
   category?: ICategory;
+  id_category: number;
 }

@@ -92,6 +92,33 @@
           <label for="category" class="form-label mb-2">
             Category
           </label>
+
+          <select #category="ngModel" type="category" class="form-control" id="category"    
+          name="category" 
+          placeholder="Category"
+          [(ngModel)]="product.id_category"
+          [ngClass]="{ 
+            'is-invalid': category.invalid && category.touched,
+            'is-valid': category.valid && category.touched
+          }" 
+          required >
+            <!-- <option *ngFor="let cat of category_list"  value="{{cat.id}}" [selected]="cat.id === product.category?.id">{{cat.name}}</option> -->
+            <option *ngFor="let cat of category_list"  value="{{cat.id}}">{{cat.name}}</option>
+          </select>
+          
+          @if (category.invalid) {
+            <div *ngIf="category.invalid" class="invalid-feedback">
+              Please add a valid category
+            </div>
+          }
+        </div>
+        
+        <!-- Category -->
+
+        <!-- <div class="col-6 pt-3">
+          <label for="category" class="form-label mb-2">
+            Category
+          </label>
           <input #category="ngModel" type="category" class="form-control" id="category"    
             name="category" 
             placeholder="Category"
@@ -108,9 +135,9 @@
               Please add a valid category
             </div>
           }
-        </div>
-        
-        
+        </div> -->
+
+
         @if(action == 'add') {
          
         }

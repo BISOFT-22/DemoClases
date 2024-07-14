@@ -1,8 +1,9 @@
-import { Component, Input, inject } from '@angular/core';
-import { IFeedBackMessage, IProduct, IFeedbackStatus} from '../../../interfaces';
+import { Component, Input, effect, inject } from '@angular/core';
+import { IFeedBackMessage, IProduct, IFeedbackStatus, ICategory} from '../../../interfaces';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ProductService } from '../../../services/product.service';
+import { CategoryService } from '../../../services/category.service';
 
 @Component({
   selector: 'app-product-form',
@@ -22,10 +23,23 @@ export class ProductFormComponent {
     price: '',
     stock: '',
     category: {},
+    id_category: 0
   };
   @Input() action: string = 'add'
   service = inject(ProductService);
-  feedbackMessage: IFeedBackMessage = {type: IFeedbackStatus.default, message: ''};
+  category_service = inject(CategoryService);
+
+  category_list: ICategory[] = [];
+
+  feedbackMessage: IFeedBackMessage = { type: IFeedbackStatus.default, message: '' };
+  
+
+  constructor() {
+    this.category_service.getAllSignal();
+    effect(() => {      
+      this.category_list = this.category_service.categories$();
+    });
+  }
 
   handleAction (form: NgForm) {
     if (form.invalid) {
@@ -34,6 +48,7 @@ export class ProductFormComponent {
       });
       return;
     } else {
+      this.product.category = { id: this.product.id_category};
       this.service[ this.action == 'add' ? 'saveProductSignal': 'updateProductSignal'](this.product).subscribe({
         next: () => {
           this.feedbackMessage.type = IFeedbackStatus.success;
